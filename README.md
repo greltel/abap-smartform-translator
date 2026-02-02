@@ -12,7 +12,7 @@ It decouples text management from form development, allowing functional consulta
 1. [License](#License)
 2. [Contributors-Developers](#Contributors-Developers)
 3. [Why use this?](#Why-use-this?)
-4. [Installation & Setup](#Installation)
+4. [Installation](#Installation)
 5. [Usage](#Usage)
 
 ## License
