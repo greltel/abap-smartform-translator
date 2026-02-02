@@ -5,7 +5,7 @@
 ![ABAP Version](https://img.shields.io/badge/ABAP-7.40%2B-blue)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
-A lightweight, dynamic **runtime translation tool** for SAP Smartforms and Adobe Forms.
+A lightweight, dynamic **runtime translation tool** for SAP Smartforms.
 It decouples text management from form development, allowing functional consultants or users to maintain labels via a simple database table (`SM30`), bypassing the complex standard SE63 workflow.
 
 ## 🚀 Why use this?
@@ -18,26 +18,7 @@ It decouples text management from form development, allowing functional consulta
 * **Unit Tested:** Includes built-in ABAP Unit tests.
 
 ## 🛠️ Installation & Setup
-
-### 1. Create the Database Table
-Create a Transparent Table named **`ZDB_FORM_TRANS`** in `SE11`.
-
-| Field | Key | Data Element | Description |
-| :--- | :---: | :--- | :--- |
-| `MANDT` | ✅ | `MANDT` | Client |
-| `FORM` | ✅ | `TDSFNAME` | Smartform Name |
-| `FIELDNAME` | ✅ | `FIELDNAME` | Field Name in Structure |
-| `LANGU` | ✅ | `SPRAS` | Language Key |
-| `DESCR` | | `TEXT50` | Translated Text / Label |
-
-> **⚠️ Important Performance Setting:**
-> In `SE11` -> Technical Settings:
-> * **Buffering:** "Buffering Activated"
-> * **Buffering Type:** "Fully Buffered"
-> * **Translation:** "Table is language-dependent but not translation-relevant"
-
-### 2. Install the Class
-Create the class `ZCL_FORM_TRANSLATION`. You can copy the source code from the `src/` folder of this repository.
+Install via ABAPGit
 
 ## 💻 Usage
 
@@ -60,7 +41,7 @@ gs_labels-title = 'Invoice'.
 " 2. Translate dynamically based on Language and DB Configuration
 NEW zcl_form_translation( )->translate_form(
   EXPORTING
-    iv_formname      = 'ZINVOICE_FORM'   " Key in ZDB_FORM_TRANS
+    iv_formname      = 'ZINVOICE_FORM'   " Key in ZABAP_FORM_TRANS
     iv_langu         = p_langu           " e.g., NAST-SPRAS
   CHANGING
     cs_form_elements = gs_labels         " The structure to be translated
