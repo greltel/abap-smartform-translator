@@ -9,7 +9,7 @@ A lightweight, dynamic **runtime translation tool** for SAP Smartforms.
 It decouples text management from form development, allowing functional consultants or users to maintain labels via a simple database table (`SM30`), bypassing the complex standard SE63 workflow.
 
 ## License
-This project is licensed under the [MIT License](https://github.com/greltel/ABAP-Cloud-Logger/blob/main/LICENSE).
+This project is licensed under the [MIT License](https://github.com/greltel/abap-smartform-translator/blob/main/LICENSE).
 
 ## Contributors-Developers
 The repository was created by [George Drakos](https://www.linkedin.com/in/george-drakos/).
