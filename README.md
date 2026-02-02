@@ -11,7 +11,7 @@ It decouples text management from form development, allowing functional consulta
 # Table of contents
 1. [License](#License)
 2. [Contributors-Developers](#Contributors-Developers)
-3. [Why use this?](#Why-use-this?)
+3. [Key Benefits](#Key-Benefits)
 4. [Installation](#Installation)
 5. [Usage](#Usage)
 
@@ -21,7 +21,7 @@ This project is licensed under the [MIT License](https://github.com/greltel/abap
 ## Contributors-Developers
 The repository was created by [George Drakos](https://www.linkedin.com/in/george-drakos/).
 
-## Why use this?
+## Key Benefits
 
 * **No more SE63:** Forget about the painful standard translation process for Smartforms.
 * **Zero Hardcoding:** Keep your form logic clean. No more `IF sy-langu = 'D'. text = 'Kunde'. ENDIF`.
