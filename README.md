@@ -14,7 +14,7 @@ This project is licensed under the [MIT License](https://github.com/greltel/abap
 ## Contributors-Developers
 The repository was created by [George Drakos](https://www.linkedin.com/in/george-drakos/).
 
-## 🚀 Why use this?
+## Why use this?
 
 * **No more SE63:** Forget about the painful standard translation process for Smartforms.
 * **Zero Hardcoding:** Keep your form logic clean. No more `IF sy-langu = 'D'. text = 'Kunde'. ENDIF`.
@@ -23,11 +23,11 @@ The repository was created by [George Drakos](https://www.linkedin.com/in/george
 * **Performance:** Optimized with table buffering to ensure zero impact on print times.
 * **Unit Tested:** Includes built-in ABAP Unit tests.
 
-## 🛠️ Installation & Setup
+## Installation & Setup
 
 * Install via [ABAPGit](http://abapgit.org)
 
-## 💻 Usage
+## Usage
 
 ### In your Smartform Driver Program / Print Program
 
