@@ -6,7 +6,7 @@
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 A lightweight, dynamic **runtime translation tool** for SAP Smartforms.
-It decouples text management from form development, allowing functional consultants or users to maintain labels via a simple database table (`SM30`), bypassing the complex standard SE63 workflow.
+It decouples text management from form development, allowing functional consultants or users to maintain labels via a simple database table (`SM30`,`Business Configuration`), bypassing the complex standard SE63 workflow.
 
 ## License
 This project is licensed under the [MIT License](https://github.com/greltel/abap-smartform-translator/blob/main/LICENSE).
