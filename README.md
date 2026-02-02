@@ -51,17 +51,16 @@ DATA: BEGIN OF gs_labels,
         customer_lbl TYPE string,
       END OF gs_labels.
 
-" 1. Initialize (Optional defaults)
+" 1.Initialize (Optional defaults)
 gs_labels-title = 'Invoice'.
 
-" 2. Translate dynamically based on Language and DB Configuration
+" 2.Translate dynamically based on Language and DB Configuration
 NEW zcl_form_translation( )->translate_form(
   EXPORTING
     iv_formname      = 'ZINVOICE_FORM'   " Key in ZABAP_FORM_TRANS
     iv_langu         = p_langu           " e.g., NAST-SPRAS
   CHANGING
-    cs_form_elements = gs_labels         " The structure to be translated
-).
+    cs_form_elements = gs_labels ).         " The structure to be translated
 
 " 3. The gs_labels structure now contains the translated texts from ZDB_FORM_TRANS
 "    Pass this structure to your Smartform / Adobe Form interface.
