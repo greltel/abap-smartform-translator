@@ -11,8 +11,8 @@ It decouples text management from form development, allowing functional consulta
 # Table of contents
 1. [License](#License)
 2. [Contributors-Developers](#Contributors-Developers)
-3. [ Why use this?](#Why-use-this?)
-4. [Installation & Setup](#Installation-&-Setup)
+3. [Why use this?](#Why-use-this?)
+4. [Installation & Setup](#Installation)
 5. [Usage](#Usage)
 
 ## License
@@ -30,7 +30,7 @@ The repository was created by [George Drakos](https://www.linkedin.com/in/george
 * **Performance:** Optimized with table buffering to ensure zero impact on print times.
 * **Unit Tested:** Includes built-in ABAP Unit tests.
 
-## Installation & Setup
+## Installation
 
 * Install via [ABAPGit](http://abapgit.org)
 
