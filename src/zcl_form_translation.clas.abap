@@ -1,9 +1,11 @@
 class ZCL_FORM_TRANSLATION definition
   public
-  final
   create public .
 
 public section.
+
+  types:
+    r_fieldname TYPE RANGE OF zabap_form_trans-fieldname .
 
     "! <p class="shorttext synchronized">Translates fields of a structure based on DB configuration</p>
     "! @parameter iv_formname | <p class="shorttext synchronized">Smartform/Form Name (Key in DB)</p>
@@ -16,6 +18,15 @@ public section.
     changing
       !CS_FORM_ELEMENTS type ANY .
   PROTECTED SECTION.
+
+    types tt_zabap_form_transv type STANDARD TABLE OF zabap_form_trans with empty key.
+
+    METHODS get_translations
+      IMPORTING
+                !iv_formname           TYPE tdsfname
+                !iv_langu              TYPE syst_langu
+                !iv_fieldnames         TYPE r_fieldname
+      RETURNING VALUE(re_translations) TYPE zcl_form_translation=>tt_zabap_form_transv.
   PRIVATE SECTION.
 ENDCLASS.
 
@@ -30,24 +41,13 @@ CLASS ZCL_FORM_TRANSLATION IMPLEMENTATION.
       RETURN.
     ENDIF.
 
-    TYPES r_fieldname TYPE RANGE OF zabap_form_trans-fieldname.
-    DATA(lr_fieldname) = VALUE r_fieldname( FOR <fs> IN CAST cl_abap_structdescr( cl_abap_typedescr=>describe_by_data( cs_form_elements ) )->components
-                                          ( low    = <fs>-name
-                                            high   = <fs>-name
-                                            sign   = 'I'
-                                            option = 'EQ' ) ).
-
-    TRY.
-        SELECT FROM zabap_form_trans
-          FIELDS *
-          WHERE fieldname IN @lr_fieldname
-            AND form  EQ @iv_formname
-            AND langu EQ @( COND #( WHEN iv_langu IS NOT INITIAL THEN iv_langu
-                                    ELSE cl_abap_context_info=>get_user_language_abap_format( ) ) )
-           INTO TABLE @DATA(lt_translations).
-      CATCH cx_abap_context_info_error.
-    ENDTRY.
-
+    DATA(lt_translations) = me->get_translations( iv_fieldnames = VALUE r_fieldname( FOR <fs> IN CAST cl_abap_structdescr( cl_abap_typedescr=>describe_by_data( cs_form_elements ) )->components
+                                                                                   ( low    = <fs>-name
+                                                                                     high   = <fs>-name
+                                                                                     sign   = 'I'
+                                                                                     option = 'EQ' )  )
+                                                  iv_formname   = iv_formname
+                                                  iv_langu      = iv_langu ).
     IF lt_translations IS INITIAL.
       RETURN.
     ENDIF.
@@ -67,6 +67,22 @@ CLASS ZCL_FORM_TRANSLATION IMPLEMENTATION.
       ENDIF.
 
     ENDLOOP.
+
+  ENDMETHOD.
+
+
+  METHOD get_translations.
+
+    TRY.
+        SELECT FROM zabap_form_trans
+          FIELDS *
+          WHERE fieldname IN @iv_fieldnames
+            AND form  EQ @iv_formname
+            AND langu EQ @( COND #( WHEN iv_langu IS NOT INITIAL THEN iv_langu
+                                    ELSE cl_abap_context_info=>get_user_language_abap_format( ) ) )
+           INTO TABLE @re_translations.
+      CATCH cx_abap_context_info_error.
+    ENDTRY.
 
   ENDMETHOD.
 ENDCLASS.
