@@ -1,5 +1,3 @@
-# abap-smartform-translator
-
 # ABAP Smartform Translator
 
 ![ABAP Version](https://img.shields.io/badge/ABAP-7.40%2B-blue)
