@@ -2,7 +2,9 @@
 > **Open Source Contribution:** This project is community-driven and **Open Source**! 🚀  
 > If you spot a bug or have an idea for a cool enhancement, your contributions are more than welcome. Feel free to open an **Issue** or submit a **Pull Request**.
 
+![ABAP Cloud](https://img.shields.io/badge/ABAP-Cloud%20Ready-green)
 ![ABAP Version](https://img.shields.io/badge/ABAP-7.50%2B-blue)
+[![Code Statistics](https://img.shields.io/badge/CodeStatistics-abaplint-blue)](https://abaplint.app/stats/greltel/abap-smartform-translator)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 A lightweight, dynamic **runtime translation tool** for SAP Smartforms.
