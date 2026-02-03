@@ -15,7 +15,8 @@ It decouples text management from form development, allowing functional consulta
 2. [Contributors-Developers](#Contributors-Developers)
 3. [Key Benefits](#Key-Benefits)
 4. [Installation](#Installation)
-5. [Usage](#Usage)
+5. [Design Goals-Features](#Design-Goals-Features)
+6. [Usage](#Usage)
 
 ## License
 This project is licensed under the [MIT License](https://github.com/greltel/abap-smartform-translator/blob/main/LICENSE).
@@ -35,6 +36,12 @@ The repository was created by [George Drakos](https://www.linkedin.com/in/george
 ## Installation
 
 * Install via [ABAPGit](http://abapgit.org)
+
+## Design Goals-Features
+
+* Install via [ABAPGit](http://abapgit.org)
+* ABAP Cloud/Clean Core compatibility.Passed SCI check variant S4HANA_READINESS_2023 and ABAP_CLOUD_READINESS
+* Unit Tested
 
 ## Usage
 
