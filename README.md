@@ -14,9 +14,8 @@ It decouples text management from form development, allowing functional consulta
 1. [License](#License)
 2. [Contributors-Developers](#Contributors-Developers)
 3. [Key Benefits](#Key-Benefits)
-4. [Installation](#Installation)
-5. [Design Goals-Features](#Design-Goals-Features)
-6. [Usage](#Usage)
+4. [Design Goals-Features](#Design-Goals-Features)
+5. [Usage](#Usage)
 
 ## License
 This project is licensed under the [MIT License](https://github.com/greltel/abap-smartform-translator/blob/main/LICENSE).
@@ -32,10 +31,6 @@ The repository was created by [George Drakos](https://www.linkedin.com/in/george
 * **Generic:** Works with **any** ABAP structure or Form interface using RTTI.
 * **Performance:** Optimized with table buffering to ensure zero impact on print times.
 * **Unit Tested:** Includes built-in ABAP Unit tests.
-
-## Installation
-
-* Install via [ABAPGit](http://abapgit.org)
 
 ## Design Goals-Features
 
