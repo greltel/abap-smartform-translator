@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_DTEL" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <DD04V>
+    <ROLLNAME>ZABAP_FORM_TRANS_LANGU</ROLLNAME>
+    <DDLANGUAGE>E</DDLANGUAGE>
+    <HEADLEN>12</HEADLEN>
+    <SCRLEN1>08</SCRLEN1>
+    <SCRLEN2>12</SCRLEN2>
+    <SCRLEN3>12</SCRLEN3>
+    <DDTEXT>Language Key</DDTEXT>
+    <REPTEXT>Language Key</REPTEXT>
+    <SCRTEXT_S>Language</SCRTEXT_S>
+    <SCRTEXT_M>Language Key</SCRTEXT_M>
+    <SCRTEXT_L>Language Key</SCRTEXT_L>
+    <DTELMASTER>E</DTELMASTER>
+    <DATATYPE>LANG</DATATYPE>
+    <LENG>000001</LENG>
+    <OUTPUTLEN>000002</OUTPUTLEN>
+    <LOWERCASE>X</LOWERCASE>
+    <CONVEXIT>ISOLA</CONVEXIT>
+   </DD04V>
+  </asx:values>
+ </asx:abap>
+</abapGit>

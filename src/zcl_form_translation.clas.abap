@@ -1,24 +1,24 @@
 "! <p class="shorttext synchronized" lang="en">Form Translation Class</p>
-class ZCL_FORM_TRANSLATION definition
-  public
-  create public .
+CLASS zcl_form_translation DEFINITION
+  PUBLIC
+  CREATE PUBLIC .
 
-public section.
+  PUBLIC SECTION.
     TYPES ty_fieldname_range TYPE RANGE OF zabap_form_trans-fieldname.
 
     "! <p class="shorttext synchronized">Translates fields of a structure based on DB configuration</p>
     "! @parameter iv_formname | <p class="shorttext synchronized">Smartform/Form Name (Key in DB)</p>
     "! @parameter iv_langu | <p class="shorttext synchronized">Target Language (Default: SY-LANGU)</p>
     "! @parameter cs_form_elements | <p class="shorttext synchronized">Structure containing fields to be translated</p>
-  methods TRANSLATE_FORM
-    importing
-      !IV_FORMNAME type TDSFNAME
-      !IV_LANGU type SYST_LANGU default SYST-LANGU
-    changing
-      !CS_FORM_ELEMENTS type ANY .
+    METHODS translate_form
+      IMPORTING
+        !iv_formname      TYPE zabap_form_trans_name
+        !iv_langu         TYPE zabap_form_trans_langu DEFAULT syst-langu
+      CHANGING
+        !cs_form_elements TYPE any .
   PROTECTED SECTION.
 
-    types tt_zabap_form_transv type STANDARD TABLE OF zabap_form_trans with empty key.
+    TYPES tt_zabap_form_transv TYPE STANDARD TABLE OF zabap_form_trans WITH EMPTY KEY.
 
     "! <p class="shorttext synchronized" lang="en"></p>
     "!
@@ -26,8 +26,8 @@ public section.
     "! @parameter iv_langu    | <p class="shorttext synchronized" lang="en">ABAP System Field: Language Key of Text Environment</p>
     METHODS get_translations
       IMPORTING
-                !iv_formname           TYPE tdsfname
-                !iv_langu              TYPE syst_langu
+                !iv_formname           TYPE zabap_form_trans_name
+                !iv_langu              TYPE zabap_form_trans_langu
                 !iv_fieldnames         TYPE ty_fieldname_range
       RETURNING VALUE(re_translations) TYPE zcl_form_translation=>tt_zabap_form_transv.
   PRIVATE SECTION.
@@ -44,28 +44,47 @@ CLASS ZCL_FORM_TRANSLATION IMPLEMENTATION.
       RETURN.
     ENDIF.
 
-    DATA(lt_translations) = me->get_translations( iv_fieldnames = VALUE ty_fieldname_range( FOR <fs> IN CAST cl_abap_structdescr( cl_abap_typedescr=>describe_by_data( cs_form_elements ) )->components
-                                                                                          ( low    = <fs>-name
-                                                                                            high   = <fs>-name
-                                                                                            sign   = 'I'
-                                                                                            option = 'EQ' )  )
-                                                  iv_formname   = iv_formname
-                                                  iv_langu      = iv_langu ).
+    TRY.
+
+        DATA(lt_translations) = me->get_translations( iv_fieldnames = VALUE ty_fieldname_range( FOR <fs> IN CAST cl_abap_structdescr( cl_abap_typedescr=>describe_by_data( cs_form_elements ) )->components
+                                                                                              ( low    = <fs>-name
+                                                                                                high   = <fs>-name
+                                                                                                sign   = 'I'
+                                                                                                option = 'EQ' )  )
+                                                      iv_formname   = iv_formname
+                                                      iv_langu      = iv_langu ).
+
+      CATCH cx_sy_move_cast_error.
+    ENDTRY.
+
     IF lt_translations IS INITIAL.
       RETURN.
     ENDIF.
 
     LOOP AT lt_translations REFERENCE INTO DATA(lr_translation).
 
-      ASSIGN COMPONENT lr_translation->*-fieldname OF STRUCTURE cs_form_elements TO FIELD-SYMBOL(<lv_field_value>) ELSE UNASSIGN.
+      ASSIGN COMPONENT lr_translation->*-fieldname OF STRUCTURE cs_form_elements TO FIELD-SYMBOL(<lv_field_value>).
 
       IF syst-subrc IS INITIAL AND <lv_field_value> IS ASSIGNED.
 
         TRY.
-            <lv_field_value> = lr_translation->*-descr.
+
+            DATA(lv_text) = lr_translation->*-descr.
+
+            IF lr_translation->*-length IS NOT INITIAL AND strlen( lv_text ) GT lr_translation->*-length.
+              lv_text = substring( val = lv_text
+                                   off = 0
+                                   len = lr_translation->*-length ).
+            ENDIF.
+
+            <lv_field_value> = lv_text.
+
           CATCH cx_root.
             CONTINUE.
         ENDTRY.
+
+        CLEAR lv_text.
+        UNASSIGN <lv_field_value>.
 
       ENDIF.
 

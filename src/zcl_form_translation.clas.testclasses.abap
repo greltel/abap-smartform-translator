@@ -4,7 +4,7 @@ CLASS lcl_test_wrapper DEFINITION INHERITING FROM zcl_form_translation.
   PUBLIC SECTION.
     DATA mt_mock_data TYPE STANDARD TABLE OF zabap_form_trans.
 
-     PROTECTED SECTION.
+  PROTECTED SECTION.
     METHODS get_translations REDEFINITION.
 ENDCLASS.
 
@@ -22,8 +22,10 @@ CLASS ltc_translator_test DEFINITION FOR TESTING
   PRIVATE SECTION.
     DATA: mo_cut TYPE REF TO lcl_test_wrapper.
 
-    METHODS: setup,
-             test_translation_success FOR TESTING.
+    METHODS:
+      setup,
+      test_translation_success FOR TESTING,
+      test_translation_length FOR TESTING.
 ENDCLASS.
 
 CLASS ltc_translator_test IMPLEMENTATION.
@@ -48,6 +50,26 @@ CLASS ltc_translator_test IMPLEMENTATION.
                             CHANGING  cs_form_elements = ls_data ).
 
     cl_abap_unit_assert=>assert_equals( exp = 'Success!' act = ls_data-lbl_name ).
+
+  ENDMETHOD.
+
+  METHOD test_translation_length.
+
+    TYPES: BEGIN OF ty_dummy,
+             lbl_name TYPE string,
+           END OF ty_dummy.
+    DATA ls_data TYPE ty_dummy.
+
+    ls_data-lbl_name = 'Original'.
+
+    mo_cut->mt_mock_data = VALUE #(
+      ( form = 'ZTEST' fieldname = 'LBL_NAME' langu = 'E' descr = 'Success!' length = 3 ) ).
+
+    mo_cut->translate_form( EXPORTING iv_formname = 'ZTEST'
+                            CHANGING  cs_form_elements = ls_data ).
+
+    cl_abap_unit_assert=>assert_equals( exp = 'Suc' act = ls_data-lbl_name ).
+
   ENDMETHOD.
 
 ENDCLASS.
