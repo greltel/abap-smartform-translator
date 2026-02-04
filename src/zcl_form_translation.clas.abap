@@ -41,22 +41,6 @@ ENDCLASS.
 CLASS zcl_form_translation IMPLEMENTATION.
 
 
-  METHOD get_translations.
-
-    TRY.
-        SELECT FROM zabap_form_trans
-          FIELDS *
-          WHERE fieldname IN @iv_fieldnames
-            AND form  EQ @iv_formname
-            AND langu EQ @( COND #( WHEN iv_langu IS NOT INITIAL THEN iv_langu
-                                    ELSE cl_abap_context_info=>get_user_language_abap_format( ) ) )
-           INTO TABLE @re_translations.
-      CATCH cx_abap_context_info_error.
-    ENDTRY.
-
-  ENDMETHOD.
-
-
   METHOD translate_form.
 
     IF iv_formname IS INITIAL.
@@ -108,6 +92,22 @@ CLASS zcl_form_translation IMPLEMENTATION.
       ENDIF.
 
     ENDLOOP.
+
+  ENDMETHOD.
+
+
+  METHOD get_translations.
+
+    TRY.
+        SELECT FROM zabap_form_trans
+          FIELDS *
+          WHERE fieldname IN @iv_fieldnames
+            AND form  EQ @iv_formname
+            AND langu EQ @( COND #( WHEN iv_langu IS NOT INITIAL THEN iv_langu
+                                    ELSE cl_abap_context_info=>get_user_language_abap_format( ) ) )
+           INTO TABLE @re_translations.
+      CATCH cx_abap_context_info_error.
+    ENDTRY.
 
   ENDMETHOD.
 ENDCLASS.
