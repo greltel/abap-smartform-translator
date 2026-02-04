@@ -4,6 +4,9 @@ CLASS zcl_form_translation DEFINITION
   CREATE PUBLIC .
 
   PUBLIC SECTION.
+
+    CONSTANTS c_version TYPE string VALUE '1.0.0' ##NEEDED.
+
     TYPES ty_fieldname_range TYPE RANGE OF zabap_form_trans-fieldname.
 
     "! <p class="shorttext synchronized">Translates fields of a structure based on DB configuration</p>
@@ -35,7 +38,23 @@ ENDCLASS.
 
 
 
-CLASS ZCL_FORM_TRANSLATION IMPLEMENTATION.
+CLASS zcl_form_translation IMPLEMENTATION.
+
+
+  METHOD get_translations.
+
+    TRY.
+        SELECT FROM zabap_form_trans
+          FIELDS *
+          WHERE fieldname IN @iv_fieldnames
+            AND form  EQ @iv_formname
+            AND langu EQ @( COND #( WHEN iv_langu IS NOT INITIAL THEN iv_langu
+                                    ELSE cl_abap_context_info=>get_user_language_abap_format( ) ) )
+           INTO TABLE @re_translations.
+      CATCH cx_abap_context_info_error.
+    ENDTRY.
+
+  ENDMETHOD.
 
 
   METHOD translate_form.
@@ -89,22 +108,6 @@ CLASS ZCL_FORM_TRANSLATION IMPLEMENTATION.
       ENDIF.
 
     ENDLOOP.
-
-  ENDMETHOD.
-
-
-  METHOD get_translations.
-
-    TRY.
-        SELECT FROM zabap_form_trans
-          FIELDS *
-          WHERE fieldname IN @iv_fieldnames
-            AND form  EQ @iv_formname
-            AND langu EQ @( COND #( WHEN iv_langu IS NOT INITIAL THEN iv_langu
-                                    ELSE cl_abap_context_info=>get_user_language_abap_format( ) ) )
-           INTO TABLE @re_translations.
-      CATCH cx_abap_context_info_error.
-    ENDTRY.
 
   ENDMETHOD.
 ENDCLASS.
