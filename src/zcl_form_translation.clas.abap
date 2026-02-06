@@ -4,6 +4,9 @@ CLASS zcl_form_translation DEFINITION
   CREATE PUBLIC .
 
   PUBLIC SECTION.
+
+    CONSTANTS c_version TYPE string VALUE '1.0.0' ##NEEDED.
+
     TYPES ty_fieldname_range TYPE RANGE OF zabap_form_trans-fieldname.
 
     "! <p class="shorttext synchronized">Translates fields of a structure based on DB configuration</p>
@@ -35,7 +38,7 @@ ENDCLASS.
 
 
 
-CLASS ZCL_FORM_TRANSLATION IMPLEMENTATION.
+CLASS zcl_form_translation IMPLEMENTATION.
 
 
   METHOD translate_form.
