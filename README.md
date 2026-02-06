@@ -6,7 +6,7 @@
 ![ABAP Version](https://img.shields.io/badge/ABAP-7.57%2B-blue)
 [![Code Statistics](https://img.shields.io/badge/CodeStatistics-abaplint-blue)](https://abaplint.app/stats/greltel/abap-smartform-translator)
 ![License](https://img.shields.io/badge/License-MIT-green)
-![Version](https://img.shields.io/endpoint?url=https://shield.abappm.com/github/owner/repo/src/zif_project_version.intf.abap)
+![Version](https://img.shields.io/endpoint?url=https://shield.abappm.com/github/greltel/abap-smartform-translator/src/zcl_form_translation.clas.abap/c_version)
 
 A lightweight, dynamic **runtime translation tool** for SAP Smartforms.
 It decouples text management from form development, allowing functional consultants or users to maintain labels via a simple database table (`SM30`,`Business Configuration`), bypassing the complex standard SE63 workflow.
